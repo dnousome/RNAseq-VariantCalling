@@ -25,8 +25,8 @@ gvcfLst = expand(os.path.join(output_vcf, "{samples}.vcf") , samples=SAMPLES)
 rule all:
     input:
         #expand(os.path.join(output_bamdir,"rg_bams","{samples}.RG.bam"), samples=SAMPLES),
-        expand(os.path.join(output_bamdir,"md_bams","{samples}.star_rg_added.sorted.dmark.bam"), samples=SAMPLES),
-        expand(os.path.join(output_bamdir,"md_bams","{samples}.star_rg_added.sorted.dmark.bam.bai"), samples=SAMPLES),
+        #expand(os.path.join(output_bamdir,"md_bams","{samples}.star_rg_added.sorted.dmark.bam"), samples=SAMPLES),
+        #expand(os.path.join(output_bamdir,"md_bams","{samples}.star_rg_added.sorted.dmark.bam.bai"), samples=SAMPLES),
         expand(os.path.join(output_bamdir,"splitncigar","{samples}_split.out.bam"), samples=SAMPLES),
         expand(os.path.join(output_bamdir,"recal1","{samples}_recal.table"), samples=SAMPLES),
         expand(os.path.join(output_bamdir,"bqsr1","{samples}_recal.pass1.bam"), samples=SAMPLES),
@@ -79,7 +79,7 @@ rule mark_dups:
 # Index bam file using samtools
 rule index:
       input:
-         bam = os.path.join(output_bamdir, "md_bams", "{samples}.star_rg_added.sorted.dmark.bam")
+         bam = "{samples}.star_rg_added.sorted.dmark.bam"
       output:
          bai = os.path.join(output_bamdir, "md_bams", "{samples}.star_rg_added.sorted.dmark.bam.bai")
       envmodules:
